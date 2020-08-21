@@ -1,0 +1,16 @@
+{
+  "name": "the_odin_project",
+  "version": "1.0.0",
+  "description": "blog project using react fro frontend and node/express for backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "react",
+    "node"
+  ],
+  "author": "Skopintsev A.",
+  "license": "ISC"
+}
