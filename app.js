@@ -16,6 +16,7 @@ mongoose.connect(mongoUrl,{useNewUrlParser:true,useUnifiedTopology:true})
 const db = mongoose.connection
 db.on('error',console.error.bind(console,"mongo connection error"))
 
+app.use(express.json())
 app.use('/api',blogRouter)
 
 module.exports = app
