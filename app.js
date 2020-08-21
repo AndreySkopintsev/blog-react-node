@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const blogRouter = require('./controllers/blogController')
+const commentRouter = require('./controllers/commentController')
 
 const mongoUrl = process.env.MONGO
 
@@ -18,5 +19,6 @@ db.on('error',console.error.bind(console,"mongo connection error"))
 
 app.use(express.json())
 app.use('/api',blogRouter)
+app.use('/comments',commentRouter)
 
 module.exports = app
