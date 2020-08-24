@@ -9,6 +9,14 @@ const PostSchema = new Schema({
     comments:[{type:Schema.Types.ObjectId,ref:'Comment'}]
 })
 
+PostSchema.set('toJSON',{
+    transform:(document,returnedObject)=>{
+        returnedObject.id = returnedObject._id
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
+})
+
 PostSchema
 .virtual('url')
 .get(()=>{
