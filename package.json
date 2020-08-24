@@ -4,7 +4,7 @@
   "description": "blog project using react fro frontend and node/express for backend",
   "main": "index.js",
   "scripts": {
-    "devstart":"nodemon index.js",
+    "devstart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,9 +15,14 @@
   "author": "Skopintsev A.",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.10.0"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
