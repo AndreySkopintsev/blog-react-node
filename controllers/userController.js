@@ -1,7 +1,31 @@
 require('dotenv').config()
 const router = require('express').Router()
 const jwt = require('jsonwebtoken')
+const passport = require('passport')
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
 const User = require('../models/userModel')
+
+const opts ={}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
+opts.secretOrKey = process.env.SECRET
+
+passport.use(new JwtStrategy(opts,(payload,done)=>{
+    console.log('SHIT')
+    console.log(payload)
+    User.findOne({_id:payload.id},(err,user)=>{
+        if(err){
+            return done(err,false)
+        }
+        if(user){
+            console.log(user)
+            return done(null,user)
+        }else{
+            return done(null,false)
+        }
+    })
+}))
+
 
 router.post('/login',(req,res)=>{
     User.findById(req.body.id)
@@ -13,22 +37,20 @@ router.post('/login',(req,res)=>{
     })
 })
 
-router.post('/test',verifyToken ,(req,res)=>{
-    jwt.verify(req.token,process.env.SECRET,(err,result)=>{
-        res.send(result)
-    })
+router.post('/test',passport.authenticate('jwt',{session:false}) ,(req,res)=>{
+    res.send(req.user.email)
 })
 
-function verifyToken(req,res,next){
-    const bearerHeader = req.headers['authorization']
+// function verifyToken(req,res,next){
+//     const bearerHeader = req.headers['authorization']
 
-    const bearer = bearerHeader.split(' ')
+//     const bearer = bearerHeader.split(' ')
 
-    const token = bearer[1]
+//     const token = bearer[1]
 
-    req.token = token
+//     req.token = token
 
-    next()
-}
+//     next()
+// }
 
 module.exports = router
