@@ -44,6 +44,7 @@ router.post('/login',(request,response)=>{
                         token
                     }
                     response.json(info)
+                    response.redirect('http://localhost:3000/newpost')
                 })
             }
             

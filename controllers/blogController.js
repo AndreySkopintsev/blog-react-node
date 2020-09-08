@@ -53,7 +53,6 @@ router.get('/posts/:id',(req,res)=>{
 //POST request 
 
 router.post('/posts',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    
     let post = new Post({
         title:req.body.title,
         text:req.body.text,
